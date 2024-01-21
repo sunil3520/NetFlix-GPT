@@ -19,3 +19,7 @@
 - NextFlix GPT
     - search Bar
     - Movies suggestions
+
+ ```
+ if you have big form in react then always use a library (Formik)
+ ```   
