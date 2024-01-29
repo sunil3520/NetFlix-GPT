@@ -1,24 +1,20 @@
 import React from 'react'
-import Home from './Home/Home'
 import {createBrowserRouter,RouterProvider} from 'react-router-dom'
-import Login from './login/Login'
-import Signup from './signup/Signup'
+import Browse from './Browse/Browse'
+import Login from './Login/Login'
 
 const AllRoutes = () => {
 
     const appRoutes = createBrowserRouter([
         {
             path: "/",
-            element: <Home/>
+            element: <Login/>
         },
         {
-            path:"/login",
-             element: <Login/>
+            path:"/browse",
+             element: <Browse/>
         },
-        {
-            path: "/signup",
-            element : <Signup/>
-        }
+        
     ])
 
   return (
