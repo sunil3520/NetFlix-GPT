@@ -9,9 +9,9 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user= useSelector((store)=>store.user)
+  const user = useSelector((store) => store.user);
   useEffect(() => {
-   const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName, photoURL } = user;
         dispatch(
@@ -22,7 +22,7 @@ const Header = () => {
             photoURL,
           })
         );
-        navigate("/browse");
+        // navigate("/browse");
       } else {
         //user is signout
         dispatch(removeUser());
@@ -34,10 +34,9 @@ const Header = () => {
   }, []);
 
   const handleLogout = () => {
-    signOut(auth)
-    .catch((err)=>{
-      navigate("/error")
-    })
+    signOut(auth).catch((err) => {
+      navigate("/error");
+    });
   };
 
   return (
@@ -45,22 +44,48 @@ const Header = () => {
       <div>
         <img className="h-full" src={netflixLogo} alt="Logo" />
       </div>
-      {
-        user &&
-        <div className="flex gap-2">
-        <img
-          className="h-full rounded-full"
-          src={user.photoURL}
-          alt="profile"
-        />
-        <button
-          onClick={handleLogout}
-          className="bg-black rounded-md text-white px-5"
+      {user && (
+        //   <div className="flex gap-2">
+        //   <img
+        //     className="h-full rounded-full"
+        //     src={user.photoURL}
+        //     alt="profile"
+        //   />
+        //   <button
+        //     onClick={handleLogout}
+        //     className="bg-black rounded-md text-white px-5"
+        //   >
+        //     LOGOUT
+        //   </button>
+        // </div>
+        <div
+          className="z-50  my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+          id="user-dropdown"
         >
-          LOGOUT
-        </button>
-      </div>
-      }
+          <div class="px-4 py-3">
+            <span class="block text-sm text-gray-900 dark:text-white">
+              Bonnie Green
+            </span>
+            <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">
+              name@flowbite.com
+            </span>
+          </div>
+          <ul class="py-2" aria-labelledby="user-menu-button">
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+          </li>
+        </ul>
+        </div>
+      )}
     </div>
   );
 };
