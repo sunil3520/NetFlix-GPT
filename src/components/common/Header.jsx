@@ -4,8 +4,9 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../../redux/userSlice";
-import { useNavigate } from "react-router-dom";
 import { FaUserTie } from "react-icons/fa";
+import useGetCurrentPath from "../../hooks/useGetCurrentPath";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const userMenuRef = useRef(null);
   const user = useSelector((store) => store.user);
-
+  const currentPath = useGetCurrentPath();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -26,7 +27,9 @@ const Header = () => {
             photoURL,
           })
         );
-        // navigate("/browse");
+        if(currentPath==="/"){
+          navigate(-1)
+        }
       } else {
         //user is signout
         dispatch(removeUser());
