@@ -8,7 +8,7 @@ export const formValidate = (email,password) =>{
         return "Email not valid"
     }
     if(!passwordValidate){
-        return "use strong password"
+        return "8+ chars, 1 lowercase, 1 uppercase, 1 number, 1 special char required."
     }
     return null;
 }

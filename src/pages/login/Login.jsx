@@ -24,10 +24,7 @@ const Login = () => {
 
   const handleLoginAndSignup = () => {
     const message = formValidate(email.current.value, password.current.value);
-    if (message) {
-      setErrorMessage(message);
-      return;
-    }
+    
 
     if(!check.current.checked){
       setErrorMessage("Please check the box");
@@ -36,6 +33,7 @@ const Login = () => {
     
 
     if (!isSignInForm) {
+      
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
@@ -43,6 +41,10 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed up
+          if (message) {
+            setErrorMessage(message);
+            return;
+          }
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
