@@ -20,6 +20,7 @@ const Login = () => {
   const password = useRef(null);
   const name = useRef(null);
   const check = useRef(null);
+  console.log(check,"check")
 
   const handleLoginAndSignup = () => {
     const message = formValidate(email.current.value, password.current.value);
@@ -27,6 +28,12 @@ const Login = () => {
       setErrorMessage(message);
       return;
     }
+
+    if(!check.current.checked){
+      setErrorMessage("Please check the box");
+      return;
+    }
+    
 
     if (!isSignInForm) {
       createUserWithEmailAndPassword(
@@ -82,15 +89,16 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <div className="relative text-white ">
+      <div className="flex  w-screen h-screen justify-center  relative text-white">
         <img
+        className="w-screen"
           src={COVER_IMAGE}
           alt="background"
         />
         {/* login form */}
         <form
           onSubmit={(e) => e.preventDefault()}
-          className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-50 flex flex-col p-12 w-full bg-black bg-opacity-80 rounded-md sm:w-5/12 md:w-3/12"
+          className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-50 flex flex-col p-12 w-[90%] bg-black bg-opacity-80 rounded-md sm:w-[50%] md:w-[40%] lg:w-[25%]"
         >
           <h1 className="text-3xl mb-7">
             {isSignInForm ? "Sign In" : "Sign Up"}

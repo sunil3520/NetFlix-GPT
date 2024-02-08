@@ -1,15 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import netflixLogo from "../../assets/Netflix-logo.png";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../../redux/userSlice";
 import { useNavigate } from "react-router-dom";
+import { FaUserTie } from "react-icons/fa";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showMenu, setShowMenu] = useState(false);
+  const userMenuRef = useRef(null);
   const user = useSelector((store) => store.user);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -39,51 +43,64 @@ const Header = () => {
     });
   };
 
+  const handleMenu = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowMenu(!showMenu);
+  };
+
+  const handleOutSideClick = (event) => {
+    if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+      setShowMenu(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleOutSideClick);
+    // return () =>{
+    //   document.removeEventListner("click",handleOutSideClick)
+    // }
+  }, []);
+
   return (
-    <div className="absolute bg-gradient-to-b from-black top-0 w-screen h-20 z-50  p-3 flex justify-between">
-      <div>
-        <img className="h-full" src={netflixLogo} alt="Logo" />
+    <div className="absolute bg-gradient-to-b from-black top-0 w-full h-20 z-50 flex justify-between ">
+      <div className="px-8 py-4">
+        <img className="w-[120px] md:[200px]" src={netflixLogo} alt="Logo" />
       </div>
       {user && (
-        //   <div className="flex gap-2">
-        //   <img
-        //     className="h-full rounded-full"
-        //     src={user.photoURL}
-        //     alt="profile"
-        //   />
-        //   <button
-        //     onClick={handleLogout}
-        //     className="bg-black rounded-md text-white px-5"
-        //   >
-        //     LOGOUT
-        //   </button>
-        // </div>
-        <div
-          className="z-50  my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-          id="user-dropdown"
-        >
-          <div class="px-4 py-3">
-            <span class="block text-sm text-gray-900 dark:text-white">
-              Bonnie Green
-            </span>
-            <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">
-              name@flowbite.com
-            </span>
-          </div>
-          <ul class="py-2" aria-labelledby="user-menu-button">
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-          </li>
-        </ul>
+        <div className="mt-4 absolute right-10" ref={userMenuRef}>
+          <button
+            onClick={handleMenu}
+            type="button"
+            className=" mb-0 flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+          >
+            <FaUserTie className="text-3xl text-gray-400" />
+          </button>
+
+          {showMenu && (
+            <div
+              className="  my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+              id="user-dropdown"
+            >
+              <div class="px-4 py-3">
+                <span class="block text-sm text-gray-900 dark:text-white">
+                  {user?.displayName}
+                </span>
+                <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                  {user?.email}
+                </span>
+              </div>
+              <ul class="py-2">
+                <li
+                  onClick={handleLogout}
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100
+              dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
+                  Sign out
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       )}
     </div>
