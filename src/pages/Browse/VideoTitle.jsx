@@ -1,16 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FaRegPlayCircle } from "react-icons/fa";
 
 const VideoTitle = ({title,overview,movieId}) => {
-    title = title.split(" ")[0] 
+    title = title.split(" ")?.[0]+" "+ title.split(" ")?.[1];
     
   return (
-    <div className=' absolute pt-[15%] px-12 bg-gradient-to-r from-black text-white w-full aspect-video'>
-        <h1 className='text-6xl font-bold'>{title}</h1>
-        <p className='py-6 w-1/4'>{overview}</p>
-        <div>
-            <Link to={`/browse/${movieId}`}><button className='px-12 py-2 bg-white text-black rounded-md hover:bg-opacity-80'>Play</button></Link>
-            <button className='ml-2 px-8 py-2 bg-gray-600 text-black rounded-md hover:bg-opacity-80'>More Info</button>
+    <div className=' absolute pt-[15%] px-12 bg-gradient-to-r from-black text-white w-screen aspect-video'>
+        <h1 className='font-bold text-3xl md:text-6xl'>{title}</h1>
+        <p className=' md:py-6 w-[90%] sm:[80%] md:w-1/3'>{overview}</p>
+        <div className='flex'>
+            <Link to={`/browse/${movieId}`}><button className=' flex items-center gap-4 px-8 cursor-pointer py-2 bg-white text-black rounded-md hover:bg-opacity-80'><span><FaRegPlayCircle className='text-3xl'/></span>Play</button></Link>
+            <button className='ml-2 px-8 py-2 bg-gray-600 cursor-pointer text-black rounded-md hover:bg-opacity-80'>More Info</button>
         </div>
     </div>
   )
