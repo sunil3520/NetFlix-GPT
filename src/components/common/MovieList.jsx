@@ -12,9 +12,9 @@ const MovieList = ({ title }) => {
     {
       title === "Now Playing" &&
       <div className="ml-2 md:ml-12">
-      <h1 className="text-2xl  text-white">{title}</h1>
+      <h1 className="text-[20px] font-medium mb-2 font-sans  text-[#CCC] ">{title}</h1>
       <div className="flex overflow-x-scroll no-scrollbar">
-        <div className="flex gap-2">
+        <div className="flex gap-x-2 my-8">
           {nowPlayingMovies?.map((movie) => {
             return (
               <MovieCard
@@ -32,9 +32,9 @@ const MovieList = ({ title }) => {
     {
       title === "Popular" &&
       <div className="ml-2 md:ml-12">
-      <h1 className="text-2xl  text-white">{title}</h1>
+      <h1 className="text-[20px] font-medium mb-2 font-sans text-[#ccc]">{title}</h1>
       <div className="flex overflow-x-scroll no-scrollbar">
-        <div className="flex gap-2">
+        <div className="flex gap-x-2 my-8">
           {upcomingMovies?.map((movie) => {
             return (
               <MovieCard
@@ -52,12 +52,13 @@ const MovieList = ({ title }) => {
      {
       title === "Trending" &&
       <div className="ml-2  md:ml-12">
-      <h1 className="text-2xl  text-white">{title}</h1>
+      <h1 className="text-[20px] font-medium mb-2 font-sans text-[#ccc] ">{title}</h1>
       <div className="flex overflow-x-scroll no-scrollbar">
-        <div className="flex gap-2">
-          {upcomingMovies?.map((movie) => {
+        <div className="flex gap-x-2 my-8">
+          {upcomingMovies?.map((movie,index) => {
             return (
               <MovieCard
+               index={index}
                 key={movie.id}
                 movieId={movie.id}
                 poster_path={movie.poster_path}
