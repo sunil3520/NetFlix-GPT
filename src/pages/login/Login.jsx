@@ -33,7 +33,10 @@ const Login = () => {
     
 
     if (!isSignInForm) {
-      
+      if (message) {
+        setErrorMessage(message);
+        return;
+      }
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
@@ -41,10 +44,7 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed up
-          if (message) {
-            setErrorMessage(message);
-            return;
-          }
+         
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
@@ -61,9 +61,8 @@ const Login = () => {
             });
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrorMessage(errorCode + " " + errorMessage);
+    
+          setErrorMessage(error?.code?.split("/")[1]);
         });
     } else {
       signInWithEmailAndPassword(
@@ -78,7 +77,7 @@ const Login = () => {
 
         })
         .catch((error) => {
-          setErrorMessage(error.code + " " + error.message);
+          setErrorMessage(error?.code?.split("/")[1]);
         });
     }
   };

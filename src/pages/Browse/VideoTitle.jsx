@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { FaRegPlayCircle } from "react-icons/fa";
 
 const VideoTitle = ({title,overview,movieId}) => {
-    title = title.split(" ")?.[0]+" "+ title.split(" ")?.[1];
+    title = title.split(" ");
+    title = title.length>=2 ? title[0]+" "+ title[1]:title[0];
     
   return (
     <div className=' absolute pt-[15%] px-12 bg-gradient-to-r from-black text-white w-screen aspect-video'>
