@@ -15,6 +15,7 @@ const Header = () => {
   const userMenuRef = useRef(null);
   const user = useSelector((store) => store.user);
   const currentPath = useGetCurrentPath();
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -27,8 +28,8 @@ const Header = () => {
             photoURL,
           })
         );
-        if(currentPath==="/"){
-          navigate(-1)
+        if (currentPath === "/") {
+          navigate(-1);
         }
       } else {
         //user is signout
@@ -71,18 +72,18 @@ const Header = () => {
         <img className="w-[120px] md:[200px]" src={netflixLogo} alt="Logo" />
       </div>
       {user && (
-        <div className="mt-4 absolute right-10" ref={userMenuRef}>
+        <div className=" relative" ref={userMenuRef}>
           <button
             onClick={handleMenu}
             type="button"
-            className=" mb-0 flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            className=" absolute right-4 top-4 mb-0 flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
           >
             <FaUserTie className="text-3xl text-gray-400" />
           </button>
 
           {showMenu && (
             <div
-              className="  my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+              className="absolute right-4 top-8  my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
               id="user-dropdown"
             >
               <div class="px-4 py-3">
