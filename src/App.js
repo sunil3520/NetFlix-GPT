@@ -1,10 +1,17 @@
 import React from 'react'
-import AllRoutes from './pages/AllRoutes'
+import { Outlet } from 'react-router-dom'
+import Header from './components/common/Header'
+import Footer from './components/common/Footer'
 
 const App = () => {
 
   return (
-      <AllRoutes/>
+    
+      <>
+      <Header/>
+      <Outlet/>
+      <Footer/>
+      </>
   )
 }
 

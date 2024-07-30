@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import Header from "../../components/common/Header";
 import { formValidate } from "../../utils/formValidate";
 import { USER_AVATAR ,COVER_IMAGE } from "../../utils/constant";
 import {
@@ -89,7 +88,6 @@ const Login = () => {
 
   return (
     <div>
-      <Header />
       <div className="flex  w-screen h-screen justify-center  relative text-white">
         <img
         className="w-screen"
