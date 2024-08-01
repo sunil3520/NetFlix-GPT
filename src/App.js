@@ -1,10 +1,16 @@
 import React from 'react'
-import AllRoutes from './pages/AllRoutes'
+import { Outlet } from 'react-router-dom'
+import Header from './components/common/Header'
 
 const App = () => {
 
   return (
-      <AllRoutes/>
+    
+      <>
+      <Header/>
+      <Outlet/>
+      
+      </>
   )
 }
 

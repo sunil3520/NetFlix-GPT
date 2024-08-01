@@ -1,17 +1,17 @@
 import MainContainer from './MainContainer';
 import SecondaryContainer from './SecondaryContainer';
-import Header from '../../components/common/Header'
 import useNowPlayingMovies from '../../hooks/useNowPlayingMovies'
 import useUpcomingMovies from '../../hooks/useUpcomingMovies';
+import Footer from '../../components/common/Footer/Footer';
 
 const Browse = () => {
   useNowPlayingMovies();
   useUpcomingMovies();
   return (
     <div>
-      <Header/>
       <MainContainer/>
       <SecondaryContainer/>
+      <Footer/>
     </div>
   )
 }
