@@ -12,9 +12,9 @@ const MovieList = ({ title }) => {
     {
       title === "Now Playing" &&
       <div className="ml-2 md:ml-12">
-      <h1 className="text-[20px] font-medium mb-2 font-sans  text-[#CCC] ">{title}</h1>
-      <div className="flex overflow-x-scroll no-scrollbar">
-        <div className="flex gap-x-2 my-8">
+      <h1 className="text-[20px] font-medium mb-2 font-sans  text-gray-300">{title}</h1>
+      <div className=" flex  overflow-y-hidden overflow-x-scroll no-scrollbar">
+        <div className="  flex gap-x-2 my-8  mr-4 ">
           {nowPlayingMovies?.map((movie) => {
             return (
               <MovieCard
@@ -33,7 +33,7 @@ const MovieList = ({ title }) => {
       title === "Popular" &&
       <div className="ml-2 md:ml-12">
       <h1 className="text-[20px] font-medium mb-2 font-sans text-[#ccc]">{title}</h1>
-      <div className="flex overflow-x-scroll no-scrollbar">
+      <div className="flex overflow-y-hidden overflow-x-scroll no-scrollbar">
         <div className="flex gap-x-2 my-8">
           {upcomingMovies?.map((movie) => {
             return (
@@ -53,7 +53,7 @@ const MovieList = ({ title }) => {
       title === "Trending" &&
       <div className="ml-2  md:ml-12">
       <h1 className="text-[20px] font-medium mb-2 font-sans text-[#ccc] ">{title}</h1>
-      <div className="flex overflow-x-scroll no-scrollbar">
+      <div className="flex overflow-y-hidden overflow-x-scroll no-scrollbar">
         <div className="flex gap-x-2 my-8">
           {upcomingMovies?.map((movie,index) => {
             return (
