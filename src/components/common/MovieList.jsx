@@ -8,7 +8,7 @@ const MovieList = ({ title }) => {
   );
   const upcomingMovies = useSelector((store) => store.movies?.upcomingMovies);
   return (
-    <div className="w-[100%] ">
+    <div className="w-[100%]">
       {title === "Now Playing" && (
         <div className="ml-2 md:ml-12">
           <h1 className="text-[20px] font-medium mb-2 font-sans  text-gray-300">
